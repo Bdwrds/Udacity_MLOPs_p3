@@ -19,5 +19,5 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: "Configure AWS Credentials" Action For GitHub Actions
-        uses: aws-actions/configure-aws-credentials@v1
+    - name: "Configure AWS Credentials" Action For GitHub Actions
+      uses: aws-actions/configure-aws-credentials@v1

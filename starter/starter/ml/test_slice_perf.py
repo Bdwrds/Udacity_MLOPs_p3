@@ -47,26 +47,22 @@ def y_values(train_test_data, cat_features):
     return predictions, y_test, X_test
 
 def test_slice_inference(train_test_data, cat_features, y_values):
-    """ Test to see if our mean per categorical slice is in the range 1.5 to 2.5."""
+    """ Test to see if our mean f1 score per categorical per slice is greater than 0.6. Training is ~0.68"""
     test_data = train_test_data[1].reset_index(drop=True)
+    cols = ['feature', 'slice', 'instances', 'precision', 'recall', 'f1']
+    df_perf = pd.DataFrame(columns=cols)
     for feature in cat_features:
-        if feature == "workclass":
-            slice_values = test_data[feature].value_counts().index
-            for slice in slice_values:
-                X_test = y_values[2]
-                _idx = test_data.loc[test_data[feature] == slice].index
-                print(len(_idx))
-                predictions = y_values[0][_idx]
-                y_test = y_values[1][_idx]
-
-                # compute scores from predictions
-                precision, recall, f1_score = compute_model_metrics(y_test, predictions)
-
-                # print results from inference test
-                print(f"{slice} value | Precision score: {precision}")
-                print(f"{slice} value | Recall score: {recall}")
-                print(f"{slice} value | F1 score: {f1_score}")
-                assert (
-                        f1_score > 0.5
-                        ), f"For {slice}, slice inf score"
-
+        df_sliced_perf = pd.DataFrame(columns = cols)
+        slice_values = test_data[feature].value_counts().index
+        for slice in slice_values:
+            _idx = test_data.loc[test_data[feature] == slice].index
+            predictions = y_values[0][_idx]
+            y_test = y_values[1][_idx]
+            slice_len = len(_idx)
+            if slice_len < 25:
+                continue
+            precision, recall, f1_score = compute_model_metrics(y_test, predictions)
+            slice_performance = pd.DataFrame([[feature, slice, slice_len, precision, recall, f1_score]], columns = cols)
+            df_sliced_perf = df_sliced_perf.append(slice_performance, ignore_index=True)
+        df_perf = df_perf.append(df_sliced_perf)
+    assert (df_perf.f1.mean() > 0.6), f"For {slice}, slice inf score"

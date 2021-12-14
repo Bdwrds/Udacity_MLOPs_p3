@@ -4,10 +4,13 @@ from sklearn.model_selection import train_test_split
 
 # Add the necessary imports for the starter code.
 import pandas as pd
-import joblib
+import numpy as np
+#import joblib
 import os
 from ml.model import train_model, compute_model_metrics, inference
 from ml.data import process_data
+from pickle import dump
+
 # Add code to load in the data.
 FP_CWD = os.getcwd()
 FP_DATA = 'starter/data/census.csv'
@@ -40,8 +43,10 @@ X_test, y_test, encoder, lb = process_data(
 model = train_model(X_train, y_train)
 
 # save model in existing dir
-FP_MODEL = "starter/model/random_forest.joblib"
-joblib.dump(model, os.path.join(FP_CWD, FP_MODEL))
+FP_MODEL = "starter/model/random_forest.pkl"
+FP_ENCODER = "starter/model/encoder.pkl"
+dump(model, open(os.path.join(FP_CWD, FP_MODEL), 'wb'))
+dump(encoder, open(os.path.join(FP_CWD, FP_ENCODER), 'wb'))
 
 # run inference on the latest data
 predictions = inference(model, X_test)

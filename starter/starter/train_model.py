@@ -15,7 +15,7 @@ data = pd.read_csv(os.path.join(FP_CWD, FP_DATA))
 
 
 # Optional enhancement, use K-fold cross validation instead of a train-test split.
-train, test = train_test_split(data, test_size=0.20)
+train, test = train_test_split(data, test_size=0.20, random_state=50)
 
 cat_features = [
     "workclass",
@@ -31,7 +31,7 @@ X_train, y_train, encoder, lb = process_data(
     train, categorical_features=cat_features, label="salary", training=True
 )
 
-# Proces the test data with the process_data function.
+# Process the test data with the process_data function.
 X_test, y_test, encoder, lb = process_data(
     test, categorical_features=cat_features, encoder=encoder, lb=lb, label="salary", training=False
 )

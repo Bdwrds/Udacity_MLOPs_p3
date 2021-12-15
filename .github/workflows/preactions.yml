@@ -47,6 +47,3 @@ jobs:
     - name: Pulled latest data
       run: |
         dvc pull
-    - name: Use pytest
-      run:
-        pytest -vv -s

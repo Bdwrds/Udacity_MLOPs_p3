@@ -57,7 +57,7 @@ cat_feat = [
         "native-country",
     ]
 
-@app.get("/")
+@app.get("/home/")
 async def create_welcome():
     return {"Welcome to my model page. POST fields to /infer/ for running inference"}
 

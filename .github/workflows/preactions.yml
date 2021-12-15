@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: aws
+name: preactions
 
 # Controls when the workflow will run
 on:
@@ -28,7 +28,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install flake8 pytest
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        if [ -f starter/requirements.txt ]; then pip install -r starter/requirements.txt; fi
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
@@ -42,14 +42,9 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-session-token: ${{ secrets.AWS_SECRET_SESSION_TOKEN }}
         aws-region: eu-west-2
-    - uses: iterative/setup-dvc@v1
-      with:
-        github_token: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      env:
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-session-token: ${{ secrets.AWS_SECRET_SESSION_TOKEN }}
-        aws-region: eu-west-2
-    - name: Version Data
+    - name: Set up DVC
+      uses: iterative/setup-dvc@v1
+    - name: Pulled latest data
       run: |
         dvc pull
     - name: Use pytest

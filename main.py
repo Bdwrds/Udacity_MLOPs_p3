@@ -19,6 +19,7 @@ if "DYNO" in os.environ and os.path.isdir(".dvc"):
         exit("dvc pull failed")
     os.system("rm -r .dvc .apt/usr/lib/dvc")
 
+
 sys.path.append(os.path.join(os.getcwd(), 'starter'))
 data = importlib.import_module('ml.data')
 model = importlib.import_module('ml.model')

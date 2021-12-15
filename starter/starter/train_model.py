@@ -13,7 +13,7 @@ from pickle import dump
 
 # Add code to load in the data.
 FP_CWD = os.getcwd()
-FP_DATA = 'starter/data/census.csv'
+FP_DATA = 'data/census.csv'
 data = pd.read_csv(os.path.join(FP_CWD, FP_DATA))
 
 
@@ -43,8 +43,8 @@ X_test, y_test, encoder, lb = process_data(
 model = train_model(X_train, y_train)
 
 # save model in existing dir
-FP_MODEL = "starter/model/random_forest.pkl"
-FP_ENCODER = "starter/model/encoder.pkl"
+FP_MODEL = "model/random_forest.pkl"
+FP_ENCODER = "model/encoder.pkl"
 dump(model, open(os.path.join(FP_CWD, FP_MODEL), 'wb'))
 dump(encoder, open(os.path.join(FP_CWD, FP_ENCODER), 'wb'))
 

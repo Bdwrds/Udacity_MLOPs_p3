@@ -18,8 +18,8 @@ model = importlib.import_module('ml.model')
 
 process_data = data.process_data
 inference = model.inference
-#from starter.starter.ml.data import process_data
-#from starter.starter.ml.model import inference
+#from bla.bla.ml.data import process_data
+#from bla.bla.ml.model import inference
 
 app = FastAPI()
 

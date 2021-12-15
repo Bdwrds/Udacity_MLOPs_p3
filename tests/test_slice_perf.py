@@ -3,8 +3,8 @@ import pytest
 import os
 import joblib
 from sklearn.model_selection import train_test_split
-from starter.starter.ml.data import process_data
-from starter.starter.ml.model import compute_model_metrics, inference
+from starter.ml.data import process_data
+from starter.ml.model import compute_model_metrics, inference
 
 FP_CWD = os.getcwd()
 FP_DATA = 'data/census.csv'

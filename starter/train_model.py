@@ -2,7 +2,7 @@
 
 from sklearn.model_selection import train_test_split
 
-# Add the necessary imports for the starter code.
+# Add the necessary imports for the bla code.
 import pandas as pd
 import numpy as np
 #import joblib

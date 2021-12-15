@@ -3,11 +3,11 @@ from fastapi.testclient import TestClient
 import importlib
 import os
 
-#from starter.main import app
-#from starter.sample_request import data, data2
+#from bla.main import app
+#from bla.sample_request import data, data2
 print(os.getcwd())
 import sys
-sys.path.append(os.path.join(os.getcwd()))#, 'starter'))
+sys.path.append(os.path.join(os.getcwd()))#, 'bla'))
 print("sys.paths", sys.path)
 main = importlib.import_module('main')
 sample_request = importlib.import_module('sample_request')

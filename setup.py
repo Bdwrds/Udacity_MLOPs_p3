@@ -1,7 +1,7 @@
 import setuptools
 
 setuptools.setup(
-    name="starter",
+    name="bla",
     version="0.0.0",
     description="Starter code.",
     author="Student",

@@ -9,14 +9,23 @@ from pydantic import BaseModel, Field
 from sklearn.preprocessing import OneHotEncoder
 import numpy as np
 import pandas as pd
-from starter.starter.ml.data import process_data
-from starter.starter.ml.model import inference
+import importlib
+import sys
+
+sys.path.append(os.path.join(os.getcwd(), 'starter'))
+data = importlib.import_module('ml.data')
+model = importlib.import_module('ml.model')
+
+process_data = data.process_data
+inference = model.inference
+#from starter.starter.ml.data import process_data
+#from starter.starter.ml.model import inference
 
 app = FastAPI()
 
 FP_CWD = os.getcwd()
-FP_MODEL = "starter/model/random_forest.pkl"
-FP_ENCODER = "starter/model/encoder.pkl"
+FP_MODEL = "model/random_forest.pkl"
+FP_ENCODER = "model/encoder.pkl"
 encoder = load(open(os.path.join(FP_CWD, FP_ENCODER), 'rb'))
 model = load(open(os.path.join(FP_CWD, FP_MODEL), 'rb'))
 

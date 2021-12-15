@@ -18,7 +18,7 @@ data = {
     "native-country": "United-States"
 }
 # pred 1
-data = {
+data2 = {
     "age": 52,
     "workclass": "Self-emp-not-inc",
     "fnlgt": 209642,

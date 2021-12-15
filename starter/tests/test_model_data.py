@@ -1,10 +1,10 @@
 import pytest
 import pandas as pd
 import os
-from .data import process_data
+from starter.starter.ml.data import process_data
 
 FP_CWD = os.getcwd()
-FP_DATA = 'starter/data/census.csv'
+FP_DATA = 'data/census.csv'
 
 @pytest.fixture
 def cat_features():

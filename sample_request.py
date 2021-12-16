@@ -43,6 +43,7 @@ data = {
     }
 }
 
+
 def query_api(argue):
     if argue.api == 'local':
         address = "http://127.0.0.1:8000/infer/"

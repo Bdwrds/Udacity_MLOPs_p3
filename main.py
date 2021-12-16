@@ -39,6 +39,7 @@ FP_ENCODER = "model/encoder.pkl"
 encoder = load(open(os.path.join(FP_CWD, FP_ENCODER), 'rb'))
 model = load(open(os.path.join(FP_CWD, FP_MODEL), 'rb'))
 
+
 class inferData(BaseModel):
     age: int
     workclass: str
@@ -66,6 +67,7 @@ cat_feat = [
         "sex",
         "native-country",
     ]
+
 
 @app.get("/")
 async def create_welcome():

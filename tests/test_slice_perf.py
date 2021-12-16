@@ -59,7 +59,7 @@ def test_slice_inference(train_test_data, cat_features, y_values):
     cols = ['feature', 'slice', 'instances', 'precision', 'recall', 'f1']
     df_perf = pd.DataFrame(columns=cols)
     for feature in cat_features:
-        df_sliced_perf = pd.DataFrame(columns = cols)
+        df_sliced_perf = pd.DataFrame(columns=cols)
         slice_values = test_data[feature].value_counts().index
         for _slice in slice_values:
             _idx = test_data.loc[test_data[feature] == _slice].index
@@ -69,7 +69,7 @@ def test_slice_inference(train_test_data, cat_features, y_values):
             if slice_len < 25:
                 continue
             precision, recall, f1_score = compute_model_metrics(y_test, predictions)
-            slice_performance = pd.DataFrame([[feature, _slice, slice_len, precision, recall, f1_score]], columns = cols)
+            slice_performance = pd.DataFrame([[feature, _slice, slice_len, precision, recall, f1_score]], columns=cols)
             df_sliced_perf = df_sliced_perf.append(slice_performance, ignore_index=True)
         df_perf = df_perf.append(df_sliced_perf)
 

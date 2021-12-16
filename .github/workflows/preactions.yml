@@ -47,3 +47,7 @@ jobs:
     - name: Pulled latest data
       run: |
         dvc pull
+    - name: Run final tests
+      run: |
+        pytest -vv -k "not main"
+

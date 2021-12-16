@@ -47,7 +47,7 @@ def y_values(train_test_data, cat_features):
     return predictions, y_test, X_test
 
 def test_slice_inference(train_test_data, cat_features, y_values):
-    """ Test to see if our mean f1 score per categorical per slice is greater than 0.6. Training is ~0.68"""
+    """ Test to see if our median f1 score per categorical per slice is greater than 0.5. Training is ~0.68"""
     test_data = train_test_data[1].reset_index(drop=True)
     cols = ['feature', 'slice', 'instances', 'precision', 'recall', 'f1']
     df_perf = pd.DataFrame(columns=cols)
@@ -65,4 +65,7 @@ def test_slice_inference(train_test_data, cat_features, y_values):
             slice_performance = pd.DataFrame([[feature, slice, slice_len, precision, recall, f1_score]], columns = cols)
             df_sliced_perf = df_sliced_perf.append(slice_performance, ignore_index=True)
         df_perf = df_perf.append(df_sliced_perf)
-    assert (df_perf.f1.mean() > 0.5), f"For {slice}, slice inf score"
+
+    # write sliced dataframe to csv to inspect later
+    df_perf.to_csv("slice_output.txt")
+    assert (df_perf.f1.median() > 0.5), f"For {slice}, slice inf score"

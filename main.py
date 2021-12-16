@@ -6,7 +6,7 @@ date: 2021-12-16
 import json
 from fastapi import FastAPI
 from fastapi.encoders import jsonable_encoder
-from typing import Optional
+from typing import Dict
 from pickle import load
 import os
 from pydantic import BaseModel, Field

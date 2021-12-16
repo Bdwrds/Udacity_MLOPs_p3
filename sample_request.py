@@ -1,3 +1,8 @@
+"""
+Flexible script to query the FastAPI
+author: Ben E
+date: 2021-12-16
+"""
 import requests
 import json
 import argparse

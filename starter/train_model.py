@@ -1,11 +1,13 @@
+"""
+Script to train the model
+author: Ben E/ partial provided
+date: 2021-12-16
+"""
 # Script to train machine learning model.
-
 from sklearn.model_selection import train_test_split
 
 # Add the necessary imports for the bla code.
 import pandas as pd
-import numpy as np
-#import joblib
 import os
 from ml.model import train_model, compute_model_metrics, inference
 from ml.data import process_data
@@ -15,7 +17,6 @@ from pickle import dump
 FP_CWD = os.getcwd()
 FP_DATA = 'data/census.csv'
 data = pd.read_csv(os.path.join(FP_CWD, FP_DATA))
-
 
 # Optional enhancement, use K-fold cross validation instead of a train-test split.
 train, test = train_test_split(data, test_size=0.20, random_state=50)

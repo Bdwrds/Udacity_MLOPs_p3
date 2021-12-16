@@ -1,13 +1,15 @@
+"""
+Main file for the FastAPI
+author: Ben E
+date: 2021-12-16
+"""
 import json
-
 from fastapi import FastAPI
 from fastapi.encoders import jsonable_encoder
 from typing import Optional
 from pickle import load
 import os
 from pydantic import BaseModel, Field
-from sklearn.preprocessing import OneHotEncoder
-import numpy as np
 import pandas as pd
 import importlib
 import sys
@@ -26,8 +28,8 @@ model = importlib.import_module('ml.model')
 
 process_data = data.process_data
 inference = model.inference
-#from bla.bla.ml.data import process_data
-#from bla.bla.ml.model import inference
+# from bla.bla.ml.data import process_data
+# from bla.bla.ml.model import inference
 
 app = FastAPI()
 

@@ -9,15 +9,18 @@ from starter.ml.model import compute_model_metrics, inference
 FP_CWD = os.getcwd()
 FP_DATA = 'data/census.csv'
 
+
 @pytest.fixture
 def data():
     df = pd.read_csv(os.path.join(FP_CWD, FP_DATA))
     return df
 
+
 @pytest.fixture
 def train_test_data(data):
     train, test = train_test_split(data, test_size=0.20, random_state=50)
     return train, test
+
 
 @pytest.fixture
 def cat_features():
@@ -33,6 +36,7 @@ def cat_features():
     ]
     return cat_feat
 
+
 @pytest.fixture
 def y_values(train_test_data, cat_features):
     X_train, y_train, encoder, lb = process_data(
@@ -46,23 +50,26 @@ def y_values(train_test_data, cat_features):
     predictions = inference(model, X_test)
     return predictions, y_test, X_test
 
+
 def test_slice_inference(train_test_data, cat_features, y_values):
-    """ Test to see if our median f1 score per categorical per slice is greater than 0.5. Training is ~0.68"""
+    """
+    Test to see if our median f1 score per categorical per slice is greater than 0.5. Training is ~0.68
+    """
     test_data = train_test_data[1].reset_index(drop=True)
     cols = ['feature', 'slice', 'instances', 'precision', 'recall', 'f1']
     df_perf = pd.DataFrame(columns=cols)
     for feature in cat_features:
         df_sliced_perf = pd.DataFrame(columns = cols)
         slice_values = test_data[feature].value_counts().index
-        for slice in slice_values:
-            _idx = test_data.loc[test_data[feature] == slice].index
+        for _slice in slice_values:
+            _idx = test_data.loc[test_data[feature] == _slice].index
             predictions = y_values[0][_idx]
             y_test = y_values[1][_idx]
             slice_len = len(_idx)
             if slice_len < 25:
                 continue
             precision, recall, f1_score = compute_model_metrics(y_test, predictions)
-            slice_performance = pd.DataFrame([[feature, slice, slice_len, precision, recall, f1_score]], columns = cols)
+            slice_performance = pd.DataFrame([[feature, _slice, slice_len, precision, recall, f1_score]], columns = cols)
             df_sliced_perf = df_sliced_perf.append(slice_performance, ignore_index=True)
         df_perf = df_perf.append(df_sliced_perf)
 

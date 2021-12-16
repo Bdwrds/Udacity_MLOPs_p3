@@ -74,14 +74,9 @@ async def create_welcome():
     return {"Welcome to my model page. POST fields to /infer/ for running inference"}
 
 
-@app.get("/home/")
-async def create_welcome2():
-    return {"Welcome to my model page. POST fields to /infer/ for running inference"}
-
-
 @app.post("/infer/")
-async def read_data(data: inferData):
-    df = pd.DataFrame(jsonable_encoder(data), index=[0])
+async def read_data(json_data: inferData):
+    df = pd.DataFrame(jsonable_encoder(json_data), index=[0])
     XX, _, _, _ = process_data(
         df, categorical_features=cat_feat, encoder=encoder, training=False
     )

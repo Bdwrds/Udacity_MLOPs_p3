@@ -43,7 +43,7 @@ data = {
     }
 }
 
-
+# return the results of the api query
 def query_api(argue):
     if argue.api == 'local':
         address = "http://127.0.0.1:8000/infer/"
@@ -54,7 +54,8 @@ def query_api(argue):
         sys.exit()
     sample_data = data[argue.classified]
     r = requests.post(address, data=json.dumps(sample_data))
-    print(r.json())
+    print("status_code: ", r.status_code)
+    print("Json response: ", r.json())
 
 
 if __name__ == "__main__":
